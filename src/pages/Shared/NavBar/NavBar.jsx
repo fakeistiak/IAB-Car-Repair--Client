@@ -1,6 +1,14 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../../Providers/AuthProvider";
 
 const NavBar = () => {
+    const { user, logOut } = useContext(AuthContext);
+
+    console.log(user?.displayName);
+    const handleSignOut = () => {
+      logOut().then().catch();
+    };
 
     const navItems = (
       <>
@@ -45,20 +53,37 @@ const NavBar = () => {
               tabIndex={0}
               className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
             >
-             {navItems}
+              {navItems}
             </ul>
           </div>
           <Link to="/" className="btn btn-ghost normal-case text-xl">
-             <img className="w-28 h-20" src="https://i.ibb.co/7KtrSwk/logo.png"/>
+            <img
+              className="w-28 h-20"
+              src="https://i.ibb.co/7KtrSwk/logo.png"
+            />
           </Link>
         </div>
         <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal px-1">
-           {navItems}
-          </ul>
+          <ul className="menu menu-horizontal px-1">{navItems}</ul>
         </div>
         <div className="navbar-end">
-          <a className="btn bg-black text-white hover:bg-gray-600">Appointment</a>
+          {user ? (
+            <button
+              onClick={handleSignOut}
+              className="btn bg-black hover:bg-gray-600 text-white"
+            >
+              Sign Out
+            </button>
+          ) : (
+            <Link to="/login">
+              <button className="btn bg-black hover:bg-gray-600 text-white">
+                Login
+              </button>
+            </Link>
+          )}
+          <a className="btn bg-black text-white hover:bg-gray-600">
+            Appointment
+          </a>
         </div>
       </div>
     );
