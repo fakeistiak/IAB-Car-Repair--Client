@@ -5,7 +5,6 @@ import { AuthContext } from "../../../Providers/AuthProvider";
 const NavBar = () => {
     const { user, logOut } = useContext(AuthContext);
 
-    console.log(user?.displayName);
     const handleSignOut = () => {
       logOut().then().catch();
     };
@@ -25,7 +24,7 @@ const NavBar = () => {
           <Link to="/blog">Blog</Link>
         </li>
         <li className="font-bold">
-          <Link to="/contact">Contact</Link>
+          <Link to="/login">Login</Link>
         </li>
       </>
     );

@@ -2,7 +2,7 @@ import { BsArrowRightSquareFill } from "react-icons/bs";
 import { Link } from "react-router-dom";
 
 const ServiceCard = ({ service }) => {
-  const { title, img, price } = service;
+  const {_id, title, img, price } = service;
 
   return (
     <div className="w-full shadow-black max-w-xs overflow-hidden bg-base-100  rounded-lg shadow-lg">
@@ -13,7 +13,7 @@ const ServiceCard = ({ service }) => {
           <span className="text-lg font-semibold text-black">
             Price: ${price}
           </span>
-          <Link>
+          <Link to={`/book/${_id}`}>
             <BsArrowRightSquareFill className="text-4xl bg-white text-black"></BsArrowRightSquareFill>
           </Link>
         </div>

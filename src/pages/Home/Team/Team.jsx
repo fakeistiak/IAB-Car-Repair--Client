@@ -9,9 +9,8 @@ const Team = () => {
           Our Executive Team
         </h1>
         <p className="max-w-2xl mx-auto my-6 text-center text-gray-500 ">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo incidunt
-          ex placeat modi magni quia error alias, adipisci rem similique, at
-          omnis eligendi optio eos harum.
+          Our dedicated team of expert mechanics and technicians is committed to
+          delivering top-notch car repairs and exceptional customer service
         </p>
         <div className="grid grid-cols-1 gap-8 mt-8 xl:mt-16 md:grid-cols-2 xl:grid-cols-4">
           <div className="flex flex-col items-center p-8 transition-colors duration-300 transform border cursor-pointer rounded-xl hover:border-transparent text-black group hover:bg-black-600 hover:bg-black hover:text-white">
@@ -70,7 +69,7 @@ const Team = () => {
                 <BsFacebook></BsFacebook>
                 <BsInstagram></BsInstagram>
                 <BsLinkedin></BsLinkedin>
-               <BsTwitter></BsTwitter>
+                <BsTwitter></BsTwitter>
               </Link>
             </div>
           </div>
@@ -90,7 +89,7 @@ const Team = () => {
                 <BsFacebook></BsFacebook>
                 <BsInstagram></BsInstagram>
                 <BsLinkedin></BsLinkedin>
-              <BsTwitter></BsTwitter>
+                <BsTwitter></BsTwitter>
               </Link>
             </div>
           </div>
