@@ -5,6 +5,7 @@ import Login from "../pages/Login/Login";
 import Register from "../pages/Register/Register";
 import Checkout from "../pages/Checkout/Checkout";
 import BookService from "../pages/BookService/BookService";
+import Bookings from "../pages/Bookings/Bookings";
 
 const router = createBrowserRouter([
   {
@@ -22,6 +23,10 @@ const router = createBrowserRouter([
       {
         path: "/register",
         element: <Register></Register>,
+      },
+      {
+        path: "/bookings",
+        element: <Bookings></Bookings>,
       },
       {
         path: "/checkout/:id",
