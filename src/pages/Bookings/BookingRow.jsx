@@ -1,15 +1,13 @@
 import { FcCancel } from "react-icons/fc";
-import swal from "sweetalert";
 
-const BookingRow = ({ booking,handleDelete }) => {
-    const { date, service, price, img, _id } = booking;
-    
+const BookingRow = ({ booking, handleDelete,handleApprove }) => {
+    const { date, service, price, img, _id,status } = booking;
 
-   
+
   return (
     <tr>
       <th className="text-3xl">
-        <button onClick={()=>handleDelete(_id)}>
+        <button onClick={() => handleDelete(_id)}>
           <FcCancel></FcCancel>
         </button>
       </th>
@@ -24,9 +22,10 @@ const BookingRow = ({ booking,handleDelete }) => {
       <td className="text-lg">{date}</td>
       <td className="text-lg">${price}</td>
       <th>
-        <button className="btn bg-black hover:bg-gray-600 text-white">
-          Details
-        </button>
+              {
+                  status ==='confirm' ? <span className="text-primary font-bold">Approved</span> :
+                  <button onClick={() => handleApprove(_id)} className="btn bg-black hover:bg-gray-600 text-white">Approve</button>
+              }
       </th>
     </tr>
   );

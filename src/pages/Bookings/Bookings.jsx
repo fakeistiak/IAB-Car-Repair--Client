@@ -11,7 +11,7 @@ const Bookings = () => {
     fetch(url)
       .then((res) => res.json())
       .then((data) => setBookings(data));
-  }, []);
+  }, [url]);
 
   const handleDelete = (id) => {
     swal({
@@ -42,10 +42,30 @@ const Bookings = () => {
       }
     });
   };
+  const handleApprove = (id) => {
+      fetch(`http://localhost:5000/bookings/${id}`, {
+          method: 'PATCH',
+          headers: {
+              'content-type':'application/json'
+          },
+          body: JSON.stringify({status:'confirm'})
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+          if (data.modifiedCount > 0) {
+              const remaining = bookings.filter(booking => booking._id !== id);
+              const updated = bookings.find(booking => booking._id === id);
+              updated.status = 'confirm'
+              const newBookings = [updated, ...remaining];
+              setBookings(newBookings);
+        }
+      });
+  };
   return (
     <div>
-      <h2 className="text-5xl font bold">Your Bookings :{bookings.length}</h2>
-      <div className="overflow-x-auto">
+      <h2 className="text-4xl text-center py-4 font-serif">Your Bookings</h2>
+      <div className="overflow-x-auto cursor-all-scroll border-y-2">
         <table className="table">
           {/* head */}
           <thead className="text-xl text-black">
@@ -67,6 +87,7 @@ const Bookings = () => {
                 key={booking._id}
                 booking={booking}
                 handleDelete={handleDelete}
+                handleApprove={handleApprove}
               ></BookingRow>
             ))}
           </tbody>
