@@ -6,6 +6,7 @@ import app from "../../firebase/firebase.config";
 import { GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
 import swal from "sweetalert";
 import Swal from "sweetalert2";
+import axios from "axios";
 
 const Login = () => {
   const [setUser] = useState(null);
@@ -42,8 +43,15 @@ const Login = () => {
     signIn(email, password)
       .then((result) => {
         console.log(result.user);
-        Swal("Login Successful", "EXPLORE THE PAGE", "success");
-        navigate(location?.state ? location.state : "/");
+        const user = { email };
+        axios.post("http://localhost:5000/jwt", user,{withCredentials:true})
+          .then(res => {
+            console.log(res.data);
+            if (res.data.success) {
+              swal("Login Successful", "EXPLORE THE PAGE", "success");
+              navigate(location?.state ? location.state : "/");
+            }
+        });
       })
       .catch((error) => {
         Swal(error?.message);
@@ -111,7 +119,10 @@ const Login = () => {
                     Sign in
                   </button>
                   <div className="flex">
-                    <button onClick={handleGoogleSignIn} className="btn btn-ghost w-full mt-4 text-white border-white hover:bg-gray-200 hover:text-black">
+                    <button
+                      onClick={handleGoogleSignIn}
+                      className="btn btn-ghost w-full mt-4 text-white border-white hover:bg-gray-200 hover:text-black"
+                    >
                       Sign In with Google{" "}
                       <FcGoogle className="text-2xl"></FcGoogle>{" "}
                     </button>

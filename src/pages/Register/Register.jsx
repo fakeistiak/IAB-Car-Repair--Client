@@ -2,6 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../../Providers/AuthProvider";
 import toast from "react-hot-toast";
+import swal from "sweetalert";
 
 const Register = () => {
   const { createUser, updateUser } = useContext(AuthContext);
@@ -28,17 +29,20 @@ const Register = () => {
 
     createUser(email, password)
       .then((result) => {
-        updateUser({ name}).then(
-          console.log(result.user),
-          toast.success("Sign up Successful"),
-          navigate("/"),
-
-          window.location.reload()
-        );
+        updateUser({ name })
+          .then(() => {
+            console.log(result.user);
+            swal("Register Successful", "EXPLORE THE PAGE", "success");
+            navigate("/");
+          })
+          .catch((error) => {
+            console.log(error);
+          });
       })
       .catch((error) => {
         console.log(error);
       });
+
   };
 
   return (
